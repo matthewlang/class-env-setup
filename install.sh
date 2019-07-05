@@ -3,7 +3,7 @@ mkdir .install_tmp
 apt-get update
 
 # vim, git, essentials
-apt-get install \
+apt-get -y install \
   build-essential \
   git \
   git-gui \
@@ -51,15 +51,15 @@ add-apt-repository \
   $(lsb_release -cs) \
   stable"
 apt-get update
-apt-get install docker-ce docker-ce-cli containerd.io
+apt-get -y install docker-ce docker-ce-cli containerd.io
 
 # gcloud
 echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-apt-get update && apt-get install google-cloud-sdk
+apt-get update && apt-get -y install google-cloud-sdk
 
 # vim
-update-alternatives --set editor /usr/bin/vim
+update-alternatives --install /usr/bin/editor editor /usr/bin/vim 100
 sudo -u $SUDO_USER cp vimrc $HOME/.vimrc
 sudo -u $SUDO_USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 sudo -u $SUDO_USER mkdir $HOME/.vimswp
