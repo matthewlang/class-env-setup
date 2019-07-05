@@ -70,10 +70,4 @@ sudo -u $SUDO_USER mkdir $HOME/.vimswp
 sudo -u $SUDO_USER vim +PluginInstall +qall || true
 sudo -u $SUDO_USER $HOME/.vim/bundle/YouCompleteMe/install.py || true
 
-read -p "Install GoLand? [y|n] " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  ./goland_install.sh
-fi
-
 rm -rf .install_tmp
