@@ -70,4 +70,10 @@ sudo -u $SUDO_USER mkdir $HOME/.vimswp
 sudo -u $SUDO_USER vim +PluginInstall +qall || true
 sudo -u $SUDO_USER $HOME/.vim/bundle/YouCompleteMe/install.py || true
 
-rm -rf .install_tmp
+chown -R $USER:$USER $HOME/go
+chown -R $USER:$USER $HOME/.cache
+groupadd docker
+usermod -aG docker $USER
+systemctl enable docker
+
+# rm -rf .install_tmp
