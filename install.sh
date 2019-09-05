@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir .install_tmp
 
 apt-get update
@@ -37,10 +39,11 @@ if [[ ! -d "/usr/local/go" ]]; then
 fi
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin
-go get google.golang.org/grpc
-go get github.com/golang/glog
-go get github.com/golang/protobuf/protoc-gen-go
-go get golang.org/x/lint/golint
+sudo -u $SUDO_USER mkdir $HOME/go
+sudo -u $SUDO_USER /usr/local/go/bin/go get google.golang.org/grpc
+sudo -u $SUDO_USER /usr/local/go/bin/go get github.com/golang/glog
+sudo -u $SUDO_USER /usr/local/go/bin/go get github.com/golang/protobuf/protoc-gen-go
+sudo -u $SUDO_USER /usr/local/go/bin/go get golang.org/x/lint/golint
 
 # docker
 apt-get -y install \
@@ -70,10 +73,10 @@ sudo -u $SUDO_USER mkdir $HOME/.vimswp
 sudo -u $SUDO_USER vim +PluginInstall +qall || true
 sudo -u $SUDO_USER $HOME/.vim/bundle/YouCompleteMe/install.py || true
 
-chown -R $USER:$USER $HOME/go
-chown -R $USER:$USER $HOME/.cache
+chown -R $SUDO_USER:$SUDO_USER $HOME/go
+chown -R $SUDO_USER:$SUDO_USER $HOME/.cache
 groupadd docker
-usermod -aG docker $USER
+usermod -aG docker $SUDO_USER
 systemctl enable docker
 
-# rm -rf .install_tmp
+rm -rf .install_tmp
