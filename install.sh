@@ -1,6 +1,7 @@
 #!/bin/bash
 
 mkdir .install_tmp
+chmod 777 .install_tmp
 
 apt-get update
 
@@ -78,7 +79,7 @@ sudo -u $SUDO_USER cp vimrc $HOME/.vimrc
 sudo -u $SUDO_USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 sudo -u $SUDO_USER mkdir $HOME/.vimswp
 sudo -u $SUDO_USER vim +PluginInstall +qall || true
-sudo -u $SUDO_USER $HOME/.vim/bundle/YouCompleteMe/install.py \
+sudo -u $SUDO_USER bash -lc $HOME/.vim/bundle/YouCompleteMe/install.py \
   --rust-completer --clang-completer --clangd-completer --go-completer || true
 
 # permissions fixes

@@ -86,9 +86,10 @@ set textwidth=80
 set formatoptions+=t
 set autoindent
 
-set background=dark
-colorscheme gruvbox
-let g:gruvbox_italic=1
+" Uncomment for gruvbox theme.
+" set background=dark
+" colorscheme gruvbox
+" let g:gruvbox_italic=1
 
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
