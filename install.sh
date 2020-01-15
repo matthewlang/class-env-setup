@@ -65,14 +65,23 @@ echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/ap
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 apt-get update && apt-get -y install google-cloud-sdk
 
+# rust
+sudo -H -u $SUDO_USER bash -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > .install_tmp/rust_install.sh"
+chmod u+x .install_tmp/rust_install.sh
+sudo -H -u $SUDO_USER bash -c ".install_tmp/rust_install.sh -y" 
+sudo -u $SUDO_USER echo 'PATH="$PATH:$HOME/.cargo/bin:$PATH"' >> $HOME/.bashrc
+sudo -u $SUDO_USER bash -lc 'PATH="$PATH:$HOME/.cargo/bin:$PATH" curl -L https://git.io/rustlings | bash -s $HOME/rustlings'
+
 # vim
 update-alternatives --install /usr/bin/editor editor /usr/bin/vim 100
 sudo -u $SUDO_USER cp vimrc $HOME/.vimrc
 sudo -u $SUDO_USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 sudo -u $SUDO_USER mkdir $HOME/.vimswp
 sudo -u $SUDO_USER vim +PluginInstall +qall || true
-sudo -u $SUDO_USER $HOME/.vim/bundle/YouCompleteMe/install.py || true
+sudo -u $SUDO_USER $HOME/.vim/bundle/YouCompleteMe/install.py \
+  --rust-completer --clang-completer --clangd-completer --go-completer || true
 
+# permissions fixes
 chown -R $SUDO_USER:$SUDO_USER $HOME/go
 chown -R $SUDO_USER:$SUDO_USER $HOME/.cache
 groupadd docker
