@@ -31,7 +31,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     fi
     tar xzf clion.tgz -C /opt/
     rm clion.tgz
-    sudo -u $SUDO_USER echo "alias clion='/opt/cLion-2019.3.2/bin/clion.sh'" >> $HOME/.bashrc
+    sudo -u $SUDO_USER echo "alias clion='/opt/clion-2019.3.2/bin/clion.sh'" >> $HOME/.bashrc
     echo "For Rust support, open CLion and install the Rust plugin."
     echo "To run CLion, run clion from the terminal."
   fi
