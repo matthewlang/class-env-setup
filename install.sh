@@ -27,13 +27,13 @@ update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 # protoc
 if [[ ! -d "/usr/local/protoc" ]]; then
   apt-get -y install autoconf automake libtool make g++ unzip
-  curl -sSLo .install_tmp/protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v3.8.0/protoc-3.8.0-linux-x86_64.zip
+  curl -sSLo .install_tmp/protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v3.8.0/protoc-3.14.0-linux-x86_64.zip
   unzip .install_tmp/protoc.zip -x readme.txt -d /usr/local/
 fi
 
 # golang
 if [[ ! -d "/usr/local/go" ]]; then
-  curl -sSLo .install_tmp/go.tgz https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz
+  curl -sSLo .install_tmp/go.tgz https://dl.google.com/go/go1.15.5.linux-amd64.tar.gz
   tar -C /usr/local -xzf .install_tmp/go.tgz
   sudo -u $SUDO_USER echo 'export GOPATH="$HOME/go"' >> $HOME/.bashrc
   sudo -u $SUDO_USER echo 'PATH="$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin"' >> $HOME/.bashrc
